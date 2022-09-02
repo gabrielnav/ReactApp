@@ -1,4 +1,5 @@
 // import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
 import ItemListContainer from './components/ItemListContainer';
 import NavBar from './components/NavBar';
@@ -6,31 +7,66 @@ import Saludo from './components/Saludo';
 
 function App(props) {
 
-  const mensaje = 'Bienvenido a mi app'
-  const estilos = {
-    backgroundColor: '#888',
-    padding: '20px'
-  }
+const [counter, setCounter] = useState(0)
+const [products, setProducts] = useState([])
 
-  const log = () => { console.log('Hola'); }
-  const log2 = () => { console.log('Hi!'); }
+useEffect( () => {
+  
+  console.log('Promesa en mounting');
+
+  const getProducts = new Promise( (resolve, reject) => {
+    const rand = Math.random()
+    console.log( rand );
+
+    if ( rand > 0.5 ) {
+      resolve( ['mouse', 'teclado', 'cpu']  )
+    } else {
+      reject( 'Promesa rechazada' )
+    }
+
+  })
+
+  getProducts
+    .then( data => {
+      console.log( data );
+      setProducts( data )
+    })
+    .catch( err => { console.log( err ); })
+    .finally( () => { console.log('finally siempre sucede'); })
+
+  // return () => {
+  //   console.log('Efecto al desmontaje');
+  // }
+}, [])
+
+useEffect( () => {
+  console.log('Efecto al montaje y cambio en counter');
+  // no usar aquí -> setCounter() generará loop infinito
+}, [counter])
+
+useEffect( () => {
+  console.log('Efecto en cada render');
+})
+
+const handleClick = () => {
+  console.log('hiciste click');
+  setCounter( counter + 1 ) // counter++ -> counter = counter + 1
+}
+
+console.log('Hubo render');
 
   return (
     <div className='container'>
       <NavBar className='NavBar'/>
+      <div className='my-5'>
+        <strong>Contador: {counter}</strong>
+      </div>
+      <button onClick={handleClick} className='btn my-5'>Click</button>
+
+      {products.map( p => <div className='bg-orange-500 my-2'>{p}</div> )}
+
       <ItemListContainer greeting={'KLOVER STORE Tu tienda online'}/>
-      <h1>¡Hola Mundo!</h1>
-      <strong>Otro mensaje</strong>
-      <h3 style={ estilos }>{ mensaje }</h3>
-      <Saludo name="Juan" lastname='Pérez' fn={log}>
-        <p>Este es un mensaje 1</p>
-        <p>Este es un mensaje 2</p>
-        <p>Este es un mensaje 3</p>
-      </Saludo>
-      <Saludo name='Ana' lastname='López' fn={log2}>
-        <li>Un elemento de lista</li>
-      </Saludo>
-      <Saludo name='Miguel' lastname='Gonzalez'/>
+                <Saludo name='Miguel' lastname='Gonzalez'/>
     </div>
   );
 }
