@@ -2,15 +2,19 @@ import CartWidget from "./CartWidget"
 
 const NavBar = () => {
   return (
-    <div className='NavBar' styles='il'>
-       <a href="."> KLOVER STORE</a>       
-        <lo><a href=".">Inicio</a></lo>
-        <lo><a href=".">Productos</a></lo>
-        <lo><a href=".">Contacto</a></lo>
-        <lo><a href=".">Nosotros</a></lo>
-        
+    <nav className='NavBar' >
+       <a href="."> KLOVER STORE</a>  
+
+      <ul className='ul'>
+
+        <li><a href=".">Inicio</a></li>
+        <li><a href=".">Productos</a></li>
+        <li><a href=".">Contacto</a></li>
+        <li><a href=".">Nosotros</a></li>
+
+      </ul>
         <CartWidget/>
-    </div>
+    </nav>
   )
 }
 export default NavBar

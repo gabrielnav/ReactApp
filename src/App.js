@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import { useEffect, useState } from 'react';
 import './App.css';
 import ItemListContainer from './components/ItemListContainer';
@@ -66,7 +65,7 @@ console.log('Hubo render');
       {products.map( p => <div className='bg-orange-500 my-2'>{p}</div> )}
 
       <ItemListContainer greeting={'KLOVER STORE Tu tienda online'}/>
-                <Saludo name='Miguel' lastname='Gonzalez'/>
+   
     </div>
   );
 }
