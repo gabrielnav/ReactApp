@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
-import ItemListContainer from './components/ItemListContainer';
+import {ItemListContainer} from './components/ItemListContainer';
 import NavBar from './components/NavBar';
 import Saludo from './components/Saludo';
 
@@ -64,7 +64,7 @@ console.log('Hubo render');
 
       {products.map( p => <div className='bg-orange-500 my-2'>{p}</div> )}
 
-      <ItemListContainer greeting={'KLOVER STORE Tu tienda online'}/>
+      <ItemListContainer /*greeting={'KLOVER STORE Tu tienda online'}*//>
    
     </div>
   );
