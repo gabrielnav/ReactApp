@@ -1,11 +1,11 @@
 import React from 'react'
 import {Item} from "./Item";
 
-export const ItemList = ({Items}) => {
+export const ItemList = ({item}) => {
   return (
-    <div>
-        {Items.length ? (
-            Items.map((Item) => <Item key={Item.id} {...Item}/> )
+    <div className='list'>
+        {item.length ? (
+            item.map((producto) => <Item key={producto.id} {...producto}/> )
         ) : (
           <h2>Cargando...</h2>
         )}

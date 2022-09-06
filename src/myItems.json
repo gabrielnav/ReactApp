@@ -2,20 +2,20 @@
     {
         "id": "1",
         "title": "Campera de Cuero",
-        "price": 35.000,
+        "price": "$ 25000",
         "img": "./img/Cuero1.jpg"
     },
     {
         "id": "2",
         "title": "Conjunto",
-        "price": 22.500,
+        "price": "$ 18500",
         "img": "./img/Mujer2.jpg"
 
     }, 
     {
         "id": "3",
         "title": "Polera de lana",
-        "price": 11500,
+        "price": "$ 11500",
         "img": "./img/Mujer4.jpg"
     }
 ]

@@ -1,17 +1,10 @@
- /*const ItemListContainer = ( {greeting} ) => {
-    return (
-      <div className="greeting"> {greeting} </div>
-    )
-  }
-  export default ItemListContainer */
-
 import React from 'react';
 import { useState, useEffect } from "react";
-import  myItemJson  from "../myItems";
+import  itemJson  from "../myItems.json";
 import {ItemList} from "./ItemList";
 
 export const ItemListContainer = () => {
-   const [list, SetList] = useState([]);
+   const [items, setItems] = useState([]);
 
    const getItems = (data, time)=> 
      new Promise((resolve, reject)=>{
@@ -25,25 +18,17 @@ export const ItemListContainer = () => {
       });
 
       useEffect(() => {
-        getItems(myItemJson, 3000)
+        getItems(itemJson, 3000)
         .then((res) => {
-            SetList(res);
+            setItems(res);
         })
         .catch((err) => console.log(err, ": no hay items"));
       }, []);
 
       return <div>
-      <ItemList Items={list}/>
+      <ItemList item={items}/>
       </div>;
     };  
 
 
 
-   /* return (
-      <div>ItemListContainer</div>
-    )
-  };
-
-
-  
-  */

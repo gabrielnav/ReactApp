@@ -1,9 +1,25 @@
 
 .container{
+  background-color: darkgrey;
   border: solid red 4px;
   margin: 20px;
   padding: 20px;
 }
+
+.list{
+  display:inline-flex;
+}
+.Card{
+  background-color: dimgrey;
+  margin: 20px;
+  padding:20px;
+  border-radius: 10px;
+  width: 200px;
+}
+.click{
+  background-image: linear-gradient(rgb(238, 198, 137), rgb(223, 204, 176));
+}
+
 .NavBar{
   border-radius: 5px;
   color:  rgb(29, 107, 22);
