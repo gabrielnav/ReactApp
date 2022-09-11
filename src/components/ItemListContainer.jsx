@@ -25,7 +25,7 @@ export const ItemListContainer = () => {
         .catch((err) => console.log(err, ": no hay items"));
       }, []);
 
-      return <div>
+      return <div className='container'>
       <ItemList item={items}/>
       </div>;
     };  
