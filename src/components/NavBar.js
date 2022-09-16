@@ -9,10 +9,9 @@ const NavBar = () => {
         
       <ul className='ul'>
 
-        <li><a href=".">Inicio</a></li>
-        <li><a href=".">Productos</a></li>
-        <li><a href=".">Contacto</a></li>
-        <li><a href=".">Nosotros</a></li>
+      <li><Link to={'./'}>Inicio</Link></li>
+      <li><Link to={'./Productos'}>Productos</Link></li>
+      <li><Link to={'./Nosotros'}>Nosotros</Link></li>
 
       </ul>
         <CartWidget/>

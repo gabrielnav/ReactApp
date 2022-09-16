@@ -1,32 +1,34 @@
-
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useState, useEffect } from "react";
+import  detailJson  from "../myDetail.json";
+import ItemDetail from "./ItemDetail";
 import { useParams } from 'react-router-dom';
-import  itemJson  from "../myItems.json";
-import MasInformacion from './ItemDetail';
 
 export const ItemDetailContainer = () => {
+   const [items, setItems] = useState([]);
+   const { id } = useParams()
 
-    const [item, setItem] = useState({});
-    const { detailId } = useParams();
-    useEffect(() => {
-        const getItem = new Promise((resolve, rejected) => {
-            setTimeout(() => {
-                itemJson ? resolve(itemJson) : rejected("Error");
-            }, 2000);
-        });
+   const getItems = (data, time)=> 
+     new Promise((resolve, reject)=>{
+       setTimeout(()=>{
+          if (data){
+            resolve(data.find( p => p.id === id ));
+          }else {
+            reject("Error");
+          }
+        },time);
+      });
 
-        getItem
-            .then(detailId && (res => setItem(res.find(It => It.id === detailId))))
-            .catch(err => console.log(`${err}: No hay nada para vender.`));
-    }, [detailId])
+      useEffect(() => {
+        getItems(detailJson, 3000)
+        .then((res) => {
+            setItems(res);
+        })
+        .catch((err) => console.log(err, ": no hay items"));
+      }, []);
 
-    return (
-        <section>
-            { Object.entries(item).length === 0 ? 
-                <div className='ubicarSpinner'>  <div className='spinner'></div>   </div>
-            :
-               <MasInformacion {...item} />
-            }
-        </section>
-    )
-}
+      return <div className='container'>
+      <ItemDetail item={items}/>
+      </div>;
+    };  
+

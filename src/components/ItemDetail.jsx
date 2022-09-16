@@ -1,23 +1,32 @@
 import React from 'react';
 import {ItemCount} from './ItemCount';
 
-const MasInformacion = ({ stock, initial, title, img, price, descripcion, diseñador}) => {
+const ItemDetail = ({ stock, initial, id, title, img, price, descripcion, diseñador}) => {
   return (
-    <div className='box-detail'>
+    /*<div >
       <img src={img} alt="" style={{width: "15rem"}} />
-      <div className='box-info'>
+      <div >
         <h2>{title}</h2>
         <h4>{diseñador}</h4>
         <p>{descripcion}</p>
-        <p className='price'>ar$ {price}</p>
-        <div className='box-info__buy'>
+        <p>{price}</p>
+        <div >
 
           <ItemCount stock={stock} initial={0} />
         </div>
       </div>
      
-    </div>
-  )
+    </div>*/
+    <article className = 'Card'>
+        <h3>{title}</h3>
+
+        <img src={img} alt="" style={{width: "15rem"}} />
+        <h4>{diseñador}</h4>
+        <p>{descripcion}</p>
+        <h3>{price}</h3>
+        <ItemCount stock={10} initial={0} />
+      </article>
+    )
 }
 
-export default MasInformacion
+export default ItemDetail
