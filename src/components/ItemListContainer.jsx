@@ -1,34 +1,39 @@
-import React from 'react';
-import { useState, useEffect } from "react";
-import  itemJson  from "../myItems.json";
-import {ItemList} from "./ItemList";
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { getFirestore } from 'firebase/firestore';
+import ItemList from './ItemList';
+import Spinner from './Spinner';
 
-export const ItemListContainer = () => {
-   const [items, setItems] = useState([]);
+function ItemListContainer({ greetings }) {
+    const [productos, setProductos] = useState([])
+    const [loading, setLoading] = useState(true)
+    const {categoryId} = useParams()
 
-   const getItems = (data, time)=> 
-     new Promise((resolve, reject)=>{
-       setTimeout(()=>{
-          if (data){
-            resolve(data);
-          }else {
-            reject("Error");
-          }
-        },time);
-      });
+    useEffect(() => {
+        const db = getFirestore()  // Conexión con base de datos de Firestore
+        const dbQuery = categoryId ? db.collection('productos').where('category', '==', categoryId) : db.collection('productos')
+        
+        dbQuery.get() 
+        .then(data => setProductos( data.docs.map( items => ( { id: items.id , ...items.data() } ) ) ))
+        .catch(err => console.log(err))
+        .finally(() => setLoading(false))
+       
+    }, [categoryId])
 
-      useEffect(() => {
-        getItems(itemJson, 3000)
-        .then((res) => {
-            setItems(res);
-        })
-        .catch((err) => console.log(err, ": no hay items"));
-      }, []);
+    return (
+        <div className="item-list-container">
+            <h1 className="title">Kloverstore</h1>
+            <p className="p-8">{greetings}</p>
+            {loading ? 
+            <Spinner/>
+            :   
+            <ItemList productos={productos} />  
+            }
+        </div>
+    )
+}
 
-      return <div className='container'>
-      <ItemList item={items}/>
-      </div>;
-    };  
+export default ItemListContainer
 
 
 
